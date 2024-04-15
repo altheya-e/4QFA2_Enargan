@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <p>Enter a number between 2 and 10:</p>
+        <input id="col" type="text" name="num1" onblur="checkNum()"> by <input id="row" type="text" name="num2" onblur="checkNum()">
+    </form>
+    <br>
+    <button id="start" onclick="generateTable()" disabled>Click here when ready!</button>
+    <p id="table"></p>
+    <script>
+        function checkNum(){
+            let col = document.getElementById("col").value;
+            let row = document.getElementById("row").value;
+            let btn = document.getElementById("start");
+            let boxCol = document.getElementById("col");
+            let boxRow = document.getElementById("row");
+
+            if((col < 10) && (col > 2)) {
+                boxCol.style.borderColor = "green";
+                if((row < 10) && (row > 2)) {
+                    boxRow.style.borderColor = "green";
+                    btn.disabled = false;
+                }
+                else {
+                    boxRow.style.borderColor = "red";
+                    btn.disabled = true;
+                }
+            }
+            else {
+                boxCol.style.borderColor = "red";
+                btn.disabled = true;
+                if((row < 10) && (row > 2)) {boxRow.style.borderColor = "green";}
+                else{boxRow.style.borderColor = "red";  }
+            }
+        }
+
+
+        function generateTable(){
+            var table = document.getElementById("table");
+            var col = document.getElementById("col").value;
+            var row = document.getElementById("row").value; 
+            var table = document.getElementById("table");
+            var text ="";
+            var y = 1;
+
+            while(y <= col) {
+                if(y == 1) {
+                    for(let x = 1; x <= row; x++) {
+                    x = x*y;
+                    text = text + x + "|";
+                    document.getElementById("table").innerHTML = text;  
+                    }
+                }
+                else {
+                    for(let x = 2; x <= row; x++) {
+                    var valueRow = x*y;
+                    text = text + valueRow + "|";
+                    document.getElementById("table").innerHTML = text;  
+                    }
+                }
+                
+                y = y + 1;
+                text = text + "<br>" + y + "|";
+            }
+        }
+    </script>
+</body>
+</html>
